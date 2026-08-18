@@ -1,7 +1,20 @@
 import os
-import pandas as pd
 import plotly.express as px
+import pandas as pd
 import streamlit as st
+
+# ลิงก์ CSV จาก Google Sheets ของคุณ
+SHEET_URL = "https://docs.google.com/spreadsheets/d/1QuYKOIV3DAzCqrRLMzdva0sPkMc0Xu1hCqptdXE1ZHI/export?format=csv"
+
+# สั่งให้ Streamlit ดึงข้อมูลใหม่จาก Google Sheets ทุกๆ 5 นาที (ttl=300)
+@st.cache_data(ttl=300)
+def load_data():
+    return pd.read_csv(SHEET_URL)
+
+# โหลดข้อมูลเข้าตัวแปร df
+df = load_data()
+
+# --- โค้ดสร้าง Dashboard ส่วนที่เหลือของคุณ ---
 
 # 1. ตั้งค่าหน้าเว็บแบบ Wide Mode
 st.set_page_config(
